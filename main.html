@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/pintuer.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <script src="js/jquery.js"></script>
+  <script src="js/pintuer.js"></script>
+  <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+  <style>
+    .item {
+      height: 180px;
+      transition: linear 0.2s
+    }
+
+    .itemFontTitle {
+      font-size: 30px;
+      text-align: center;
+      line-height: 100px;
+      color: #ffffff
+    }
+
+    .itemFont {
+      font-size: 50px;
+      text-align: center;
+      color: #ffffff
+    }
+
+    .item:hover {
+      transform: scale(1.03)
+    }
+  </style>
+</head>
+
+<body>
+  <div class="panel admin-panel">
+    <div class="conatiner-layout">
+      <div class="line-middle">
+        <div class="x4">
+          <div class="bg-green item">
+            <div class="itemFontTitle">资产总数</div>
+            <div class="itemFont">560</div>
+          </div>
+        </div>
+        <div class="x4">
+          <div class="bg-blue item">
+            <div class="itemFontTitle">资产总额</div>
+            <div class="itemFont">17876</div>
+          </div>
+        </div>
+        <div class="x4">
+          <div class="bg-red item">
+            <div class="itemFontTitle">在用资产</div>
+            <div class="itemFont">87</div>
+          </div>
+        </div>
+      </div>
+      <div id="container"></div>
+    </div>
+
+  </div>
+</body>
+<script>
+  var chart = Highcharts.chart('container', {
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: '资产月使用情况'
+    },
+    // subtitle: {
+    //   text: '请点击按钮查看坐标轴变化'
+    // },
+    xAxis: {
+      categories: ['一月', '二月', '三月', '四月', '五月', '六月',
+        '七月', '八月', '九月', '十月', '十一月', '十二月'
+      ]
+    },
+    yAxis: {
+      labels: {
+        x: -15
+      },
+      title: {
+        text: '项目'
+      }
+    },
+    series: [{
+      name: '使用次数',
+      data: [434, 523, 345, 785, 565, 843, 726, 590, 665, 434, 312, 432]
+    }],
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        // Make the labels less space demanding on mobile
+        chartOptions: {
+          xAxis: {
+            labels: {
+              formatter: function () {
+                return this.value.replace('月', '')
+              }
+            }
+          },
+          yAxis: {
+            labels: {
+              align: 'left',
+              x: 0,
+              y: -2
+            },
+            title: {
+              text: ''
+            }
+          }
+        }
+      }]
+    }
+  });
+
+  function setSize(width) {
+    chart.setSize(width, 300);
+  }
+</script>
+
+</html>

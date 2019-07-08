@@ -1,0 +1,133 @@
+﻿/*
+SQLyog Ultimate v12.08 (64 bit)
+MySQL - 5.7.19-log : Database - canvas
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`canvas` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `canvas`;
+
+/*Table structure for table `category` */
+
+DROP TABLE IF EXISTS `category`;
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分类表';
+
+/*Data for the table `category` */
+
+/*Table structure for table `loan` */
+
+DROP TABLE IF EXISTS `loan`;
+
+CREATE TABLE `loan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) DEFAULT NULL COMMENT '产品表的外键',
+  `site` varchar(255) DEFAULT NULL COMMENT '借出部门',
+  `people` varchar(255) DEFAULT NULL COMMENT '借出人',
+  `btiem` datetime DEFAULT NULL COMMENT '借出时间',
+  PRIMARY KEY (`id`),
+  KEY `pid` (`pid`),
+  CONSTRAINT `loan_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `product` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='借出表';
+
+/*Data for the table `loan` */
+
+/*Table structure for table `product` */
+
+DROP TABLE IF EXISTS `product`;
+
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` int(11) DEFAULT NULL COMMENT '分类表的外键',
+  `name` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL COMMENT '使用情况',
+  `intime` datetime DEFAULT NULL COMMENT '购置日期',
+  `price` float DEFAULT NULL COMMENT '购置价格',
+  `borrow` varchar(255) DEFAULT NULL COMMENT '借出状态',
+  `delect` varchar(255) DEFAULT NULL COMMENT '报废状态',
+  PRIMARY KEY (`id`),
+  KEY `cid` (`cid`),
+  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `category` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `product` */
+
+/*Table structure for table `property` */
+
+DROP TABLE IF EXISTS `property`;
+
+CREATE TABLE `property` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL COMMENT '属性名字',
+  PRIMARY KEY (`id`),
+  KEY `cid` (`cid`),
+  CONSTRAINT `property_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `category` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='属性表';
+
+/*Data for the table `property` */
+
+/*Table structure for table `propertyvalue` */
+
+DROP TABLE IF EXISTS `propertyvalue`;
+
+CREATE TABLE `propertyvalue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) DEFAULT NULL COMMENT '产品表的外键',
+  `ptid` int(11) DEFAULT NULL COMMENT '属性表的外键',
+  `value` varchar(4000) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pid` (`pid`),
+  KEY `ptid` (`ptid`),
+  CONSTRAINT `propertyvalue_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `product` (`id`),
+  CONSTRAINT `propertyvalue_ibfk_2` FOREIGN KEY (`ptid`) REFERENCES `property` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `propertyvalue` */
+
+/*Table structure for table `scraped` */
+
+DROP TABLE IF EXISTS `scraped`;
+
+CREATE TABLE `scraped` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) DEFAULT NULL COMMENT '产品表外键',
+  `stime` datetime DEFAULT NULL COMMENT '报废日期',
+  PRIMARY KEY (`id`),
+  KEY `pid` (`pid`),
+  CONSTRAINT `scraped_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `product` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='报废表';
+
+/*Data for the table `scraped` */
+
+/*Table structure for table `user` */
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
+  `userName` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `userType` varchar(50) NOT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `user` */
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

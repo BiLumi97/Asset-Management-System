@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/jquery.js"></script>  
+    <style>
+            option{               
+                line-height: 20px;
+            }
+            select:focus{
+                border: 2px #ddd solid;
+                box-shadow: 0 0 15px 1px #DDDDDD;
+            }
+            option:hover{
+                background: #EBCCD1;
+            }
+    </style>
+</head>
+<body>
+        <div class="form-group">
+          <div class="label">
+            <label>名称：</label>
+          </div> 
+          <div class="field">         
+			<select name="ppp" id="selectSM" class="input tips" style="width:25%; float:left;">
+			<option value="">111</option>
+            <option value="">111</option>
+            <option value="">111</option>
+            <option value="">111</option>
+			</select>
+            </div>         
+        </div>
+        <button click="IninDepart()">点一下</button>
+
+</body>
+<script>
+
+　　$("#selectSM").remove();
+　　var state = 1;
+　　$.ajax({
+　　　　type : "POST",
+　　　　url : "/getItemDepartList",
+　　　　dataType : "JSONP",
+　　　　data : {},
+　　success : function(msg) 
+　　{
+
+　　　　$("#selectSM").prepend("<option value='0'>请选择</option>");//添加第一个option值
+　　　　for (var i = 0; i < msg.rows.length; i++) {
+　　　　$("#selectSM").append("<option>"+msg.rows[i]+"</option>");
+　　}
+
+　　},error:function(){
+　　alert("获取数据失败","error");
+　　}
+　　});
+
+
+</script>
+</html> 

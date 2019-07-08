@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="renderer" content="webkit">
+  <title>资产页</title>
+  <link rel="stylesheet" href="../css/pintuer.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <script src="../js/jquery.js"></script>
+  <script src="../js/pintuer.js"></script>
+</head>
+
+<body>
+  <form method="post" action="" id="listform">
+    <div class="panel admin-panel">
+      <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
+      <div class="padding border-bottom">
+        <ul class="search" style="padding-left:10px;">
+          <li>搜索：</li>
+          <if condition="$iscid eq 1">
+            <li>
+              <select name="cid" class="input" style="width:200px; line-height:17px;" onchange="changesearch()">
+                <option value="">请选择分类</option>
+                <option value="">地点分类</option>
+                <option value="">部门分类</option>
+                <option value="">资产分类</option>
+                <option value="">人员分类</option>
+              </select>
+            </li>
+          </if>
+          <li>
+            <input type="text" placeholder="请输入搜索关键字" name="keywords" class="input" style="width:250px; line-height:17px;display:inline-block" />
+            <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()"> 搜索</a>
+            <a href="javascript:void(0)" class="button border-main icon-bars" onclick="assetOnload()"> 刷新</a></li>
+        </ul>
+      </div>
+      <table class="table table-hover text-center">
+        <tr>
+          <th width="100">资产编号</th>
+          <th width="15%">名称</th>
+          <th width="15%">存放地点</th>
+          <th width="15%">使用情况</th>
+          <th width="15%">使用部门</th>
+          <th width="310">操作</th>
+        </tr>
+      </table>
+      <div id="aaa"></div>
+
+    </div>
+  </form>
+  <script>
+    let assetData
+
+    function assetOnload() {
+      $.ajax({
+        url: 'http://rz.litop.top/getAllCanvas',
+        dataType: 'jsonp',
+        contentType: 'application/json',
+        responseType: 'application/json',
+        type: 'get',
+        data: {},
+        success: function (data) {
+          assetData = data.canvasData
+          console.log(data)
+          let info = assetData.map((v) => {
+            return `
+          <table class="table table-hover text-center">
+            <tr>
+            <td width="100">${v.numb}</td>
+            <td width="15%">${v.name}</td>
+            <td width="15%">${v.place}</td>
+            <td width="15%"><font color="#00CC99">${v.state}</font></td>
+            <td width="15%">${v.bumen}</td>
+            <td width="310">
+              <div class="button-group">
+                <a class="button border-green" href="info.html?id='${v.canvasId}'"><span class="icon-edit"></span>详细</a>
+                <a class="button border-main" href="modify.html?id='${v.canvasId}'"><span class="icon-edit"></span>修改</a> 
+                <a class="button border-red" href="javascript:void(0)" id="delData" onclick="del(${v.canvasId})"><span class="icon-trash-o"></span>删除</a> </div>
+            </td>
+          </tr>
+          </table>
+            `
+          })
+          document.getElementById('aaa').innerHTML = info
+          // console.log(data);
+        },
+        error: function (err) {
+          console.log('err', err)
+        }
+      })
+    }
+    function del(id) {
+      if (confirm("您确定要删除吗?")) {
+        $.ajax({
+          url: 'http://rz.litop.top/delCanvasManager',
+          dataType: 'jsonp',
+          contentType: 'application/json',
+          responseType: 'application/json',
+          type: 'get',
+          data: {
+            canvasId: id
+          },
+          success: function (data) {
+            if(data.operationState == true){
+              console.log(data)
+              assetOnload()
+            }
+          },
+          error: function (err) {
+            console.log('err', err)
+          }
+        })
+      }
+    }
+    function changesearch(){
+          $.ajax({
+          url: 'http://rz.litop.top/delCanvasManager',
+          dataType: 'jsonp',
+          contentType: 'application/json',
+          responseType: 'application/json',
+          type: 'get',
+          data: {
+           
+          },
+          success: function (data) {
+            if(data.operationState == true){
+              console.log(data)
+              assetOnload()
+            }
+          },
+          error: function (err) {
+            console.log('err', err)
+          }
+        })
+    }
+    window.onload = function () {
+      assetOnload()
+    }
+  </script>
+</body>
+
+</html>

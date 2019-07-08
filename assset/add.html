@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="renderer" content="webkit">
+  <title>网站信息</title>
+  <link rel="stylesheet" href="../css/pintuer.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <script src="../js/jquery.js"></script>
+  <script src="../js/pintuer.js"></script>
+  <script src="../js/jquery.form.js"></script>
+</head>
+
+<body>
+  <div class="panel admin-panel">
+    <div class="panel-head"><strong><span class="icon-pencil-square-o"></span>添加资产</strong></div>
+    <div class="body-content">
+      <form class="form-x" action="" id="assetForm" enctype="multipart/form-data">
+        <div class="form-group">
+          <div class="label">
+            <label>资产编号：</label>
+          </div>
+          <div class="field">
+            <input type="text" id="url1" name="numb" class="input tips" style="width:25%; float:left;" value="" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>名称：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url2" name="name" class="input tips" style="width:25%; float:left;" value="" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>型号：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url3" name="type" class="input tips" style="width:25%; float:left;" value="" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>详细配置：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url4" name="remark" class="input tips" style="width:25%; float:left;" value="" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>生成厂家：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url5" name="producer" class="input tips" style="width:25%; float:left;" value="" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>管理人员：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url6" name="adminer" class="input tips" style="width:25%; float:left;" value="" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>数量：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url7" name="num" class="input tips" style="width:25%; float:left;" value=""  oninput="value=value.replace(/[^\d]/g,'')" placeholder="只能输入数字" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>单价：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url8" name="price" class="input tips" style="width:25%; float:left;" value=""  oninput="value=value.replace(/[^\d]/g,'')" placeholder="只能输入数字" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>使用情况：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+<!--             <input type="text" id="url9" name="state" class="input tips" style="width:25%; float:left;" value="" /> -->
+            <select name="state" id="url9" class="input tips" style="width:25%; float:left;">
+            <option value="">在使用</option>
+            <option value="">空闲</option>
+            <option value="">维修中</option>
+            <option value="">损坏</option>
+            </select>
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>存放地点：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url10" name="place" class="input tips" style="width:25%; float:left;" value="" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>使用部门：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url11" name="bumen" class="input tips" style="width:25%; float:left;" value="" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="label">
+            <label>资产类别：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+<!--             <input type="text" id="url12" name="kind" class="input tips" style="width:25%; float:left;" value="" /> -->
+            <select name="kind" id="url12" class="input tips" style="width:25%; float:left;">
+            <option value="">房屋、建筑物</option>
+            <option value="">飞机、火车、轮船、机器、机械和其他生产设备</option>
+            <option value="">与生产经营活动有关的器具、工具、家具等</option>
+            <option value="">飞机、火车、轮船以外的运输工具</option>
+            <option value="">电子设备</option>
+            </select>
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>出厂日期：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url13" name="ptime" class="input tips" style="width:25%; float:left;" value="" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>入账日期：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url14" name="intime" class="input tips" style="width:25%; float:left;" value="" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label>登记日期：</label>
+          </div>
+          <div class="field">
+            <!-- <input type="text" class="input" name="stitle" value="" /> -->
+            <input type="text" id="url15" name="gettime" class="input tips" style="width:25%; float:left;" value="" />
+
+            <div class="tips"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="label">
+            <label></label>
+          </div>
+          <div class="field">
+            <button class="button bg-main icon-check-square-o" type="button" id="agreementSub"> 提交</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+<script src="../js/laydate.js"></script>
+<script>
+//执行一个laydate实例
+laydate.render({
+  elem: '#url13'  //指定元素
+});
+laydate.render({
+  elem: '#url14'  //指定元素
+});
+laydate.render({
+  elem: '#url15'  //指定元素
+});
+</script>
+
+<script>
+  $("#agreementSub").on("click", function () {
+    $('#assetForm').ajaxSubmit( //ajax方式提交表单
+      {
+        url: 'http://rz.litop.top/addCanvasManager',
+        type: 'get',
+        dataType: 'jsonp',
+        data: $('#assetForm').serialize(),
+        success: function (data) {
+          console.log(data)
+          if (data.operationState == true) {
+            alert('提交成功')
+          } else {
+            alert('提交失败');
+          }
+        },
+        error: function (err) {
+          console.log(err)
+        },
+        clearForm: false, //禁止清楚表单
+        resetForm: false //禁止重置表单
+      });
+  });
+</script>
+
+</html>
